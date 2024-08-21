@@ -1,4 +1,4 @@
-def send_email(message='', recipient='', sender="university.help@gmail.com"):
+def send_email(message='', recipient='', *, sender="university.help@gmail.com"):
     valid_domains = ['.com', '.ru', '.net']
     if ('@' not in recipient or '@' not in sender or
             not any(domain in recipient for domain in valid_domains) or
