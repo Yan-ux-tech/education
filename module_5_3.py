@@ -12,39 +12,45 @@ class House:
     def __eq__(self, other):
         if isinstance(other, House):
             return self.number_of_floors == other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors == other
         return False
 
     def __lt__(self, other):
         if isinstance(other, House):
             return self.number_of_floors < other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors < other
         return False
 
     def __le__(self, other):
         if isinstance(other, House):
-            return self.number_of_floors <= other.number_of_floors
+            return self.__eq__(other) or self.__lt__(other)
         return False
 
     def __gt__(self, other):
         if isinstance(other, House):
-            return self.number_of_floors > other.number_of_floors
+            return not self.__le__(other)
         return False
 
     def __ge__(self, other):
         if isinstance(other, House):
-            return self.number_of_floors >= other.number_of_floors
+            return not self.__lt__(other)
         return False
 
     def __ne__(self, other):
         if isinstance(other, House):
-            return self.number_of_floors != other.number_of_floors
+            return not self.__eq__(other)
         return False
 
     def __add__(self, value):
         if isinstance(value, int):
             self.number_of_floors += value
+        elif isinstance(value, House):
+            self.number_of_floors += value.number_of_floors
         return self
 
-    def __iadd__(self, value):
+    def __iadd__(self, value: int):
         return self.__add__(value)
 
     def __radd__(self, value):
